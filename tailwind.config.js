@@ -11,8 +11,19 @@ export default {
 
     theme: {
         extend: {
+            // Voeg het Mazda kleurenpalet toe
+            colors: {
+                'mazda-red': '#c1002a', // Mazda's "Soul Red Crystal"
+                'mazda-black': '#1a1a1a',
+                'mazda-gray': {
+                    light: '#f2f2f2',
+                    DEFAULT: '#767676',
+                    dark: '#333333',
+                },
+            },
+            // Stel het nieuwe lettertype in
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
         },
     },
