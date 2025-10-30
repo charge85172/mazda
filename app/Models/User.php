@@ -17,11 +17,22 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    // in app/Models/User.php
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role', // Voeg deze toe
     ];
+
+    /**
+     * Check if the user has the admin role.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.
