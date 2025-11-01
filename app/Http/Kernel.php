@@ -1,4 +1,4 @@
 protected $middlewareAliases = [
 // ... andere aliassen
-'admin' => \App\Http\Middleware\CheckAdminRole::class, // Voeg deze regel toe
+'admin' => \App\Http\Middleware\AdminMiddleware::class,
 ];
