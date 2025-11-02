@@ -1,72 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Mazda Car Management Applicatie
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Een webapplicatie gebouwd met Laravel voor het beheren van auto's. De applicatie implementeert een robuust
+autorisatiesysteem met twee gebruikersrollen: een normale gebruiker en een administrator.
 
-## About Laravel
+## Belangrijkste Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and
-creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in
-many web projects, such as:
+### Gebruikers
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache)
-  storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Persoonlijk Dashboard:** Gebruikers zien na het inloggen een overzicht van enkel hun eigen auto's.
+- **CRUD-operaties:** Gebruikers kunnen hun eigen auto's aanmaken, bekijken, bewerken en verwijderen.
+- **Beveiliging:** Gebruikers kunnen op geen enkele manier de gegevens van andere gebruikers inzien of manipuleren.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Administrators
 
-## Learning Laravel
+- **Admin Dashboard:** Een speciaal dashboard met een overzicht van **alle** auto's in het systeem.
+- **Volledig Beheer:** Admins kunnen elke auto van elke gebruiker direct bewerken of verwijderen.
+- **Gebruikersbeheer:** Een aparte pagina waar admins alle gebruikers kunnen zien en de mogelijkheid hebben om
+  gebruikers te verwijderen.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all
-modern web application frameworks, making it a breeze to get started with the framework.
+## Gebruikte Technologieën
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a
-modern Laravel application from scratch.
+- **Backend:** PHP 8+ / Laravel 10
+- **Frontend:** Blade Templates, HTML, CSS
+- **Database:** MySQL (of een andere relationele database die door Laravel wordt ondersteund)
+- **Development:** Laravel Sail (optioneel, voor Docker-gebaseerde lokale ontwikkeling)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video
-tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging
-into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Installatie en Lokale Setup
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in
-becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Volg deze stappen om het project lokaal op te zetten.
 
-### Premium Partners
+### Vereisten
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- PHP >= 8.1
+- Composer
+- Een database (bijv. MySQL)
+- Node.js & NPM (optioneel, voor frontend assets)
 
-## Contributing
+### Stappen
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in
-the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Clone het project:**
+   ```bash
+   git clone <repository-url>
+   cd MAZDA
+   ```
 
-## Code of Conduct
+2. **Installeer PHP dependencies:**
+   ```bash
+   composer install
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by
-the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. **Maak het configuratiebestand aan:**
+   Kopieer het `.env.example` bestand naar een nieuw `.env` bestand.
+   ```bash
+   cp .env.example .env
+   ```
 
-## Security Vulnerabilities
+4. **Genereer de applicatiesleutel:**
+   Deze sleutel is essentieel voor de beveiliging van sessies en andere versleutelde data.
+   ```bash
+   php artisan key:generate
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell
-via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. **Configureer de database:**
+   Open het `.env` bestand en vul de juiste databasegegevens in:
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=mazda_db
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-## License
+6. **Voer de database migraties uit:**
+   Dit maakt de benodigde tabellen (`users`, `cars`, etc.) aan in je database.
+   ```bash
+   php artisan migrate
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+7. **(Optioneel) Seed de database:**
+   Om de applicatie met voorbeelddata te vullen (inclusief een admin-account), kun je de seeder uitvoeren.
+   ```bash
+   php artisan db:seed
+   ```
+   *Standaard Admin Account:*
+    - **E-mail:** `admin@example.com`
+    - **Wachtwoord:** `password`
+
+8. **Start de lokale server:**
+   ```bash
+   php artisan serve
+   ```
+   De applicatie is nu beschikbaar op `http://127.0.0.1:8000`.
+
+---
+
+## Beveiliging
+
+De applicatie maakt gebruik van de ingebouwde beveiligingsfeatures van Laravel om te voldoen aan de OWASP Top 10
+standaarden.
+
+### A01: Broken Access Control
+
+- **Implementatie:** Toegangscontrole wordt strikt afgehandeld door de `CarPolicy`.
+- **Werking:** De `before()` methode in de policy geeft admins onbeperkte rechten. Voor normale gebruikers controleren
+  de `view`, `update`, en `delete` methodes of de `user_id` van de auto overeenkomt met de ID van de ingelogde
+  gebruiker. Pogingen om ongeautoriseerde data te benaderen resulteren in een **403 Forbidden** response.
+
+### A03: Injection
+
+- **Implementatie:** Alle database-interacties worden uitgevoerd via de **Eloquent ORM**.
+- **Werking:** Eloquent gebruikt onder water *prepared statements* en *parameter binding*, wat SQL Injection-aanvallen
+  effectief voorkomt. Er wordt nergens in de applicatie gebruikgemaakt van onveilige, ruwe SQL-queries.
