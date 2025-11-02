@@ -6,38 +6,33 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+// Added this use statement
+use App\Models\Car;
+
+// Added this use statement
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
-    // in app/Models/User.php
     protected $fillable = [
         'name',
         'email',
         'password',
-        'role', // Voeg deze toe
+        'role', // Added 'role' to fillable attributes
     ];
-
-    /**
-     * Check if the user has the admin role.
-     */
-    public function isAdmin(): bool
-    {
-        return $this->role === 'admin';
-    }
-
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -57,10 +52,11 @@ class User extends Authenticatable
         ];
     }
 
-    public function cars()
+    /**
+     * Get the cars for the user.
+     */
+    public function cars(): HasMany
     {
-        return $this->belongsToMany(Car::class)
-            ->withPivot('is_project_car', 'notes') // Heel belangrijk blijkbaar
-            ->withTimestamps();
+        return $this->hasMany(Car::class);
     }
 }

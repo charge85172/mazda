@@ -6,6 +6,12 @@ export default defineConfig({
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
+            host: '127.0.0.1', // <-- DEZE REGEL IS CRUCIAAL
         }),
     ],
+    server: {
+        host: '127.0.0.1',
+        port: 5173,
+    },
 });
+
