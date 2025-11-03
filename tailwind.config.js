@@ -11,7 +11,7 @@ export default {
 
     theme: {
         extend: {
-            // Voeg het Mazda kleurenpalet toe
+            // Het custom Mazda kleurenpalet
             colors: {
                 'mazda-red': '#c1002a', // Mazda's "Soul Red Crystal"
                 'mazda-black': '#1a1a1a',
@@ -21,7 +21,7 @@ export default {
                     dark: '#333333',
                 },
             },
-            // Stel het nieuwe lettertype in
+            // Het 'Inter' lettertype als standaard
             fontFamily: {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },

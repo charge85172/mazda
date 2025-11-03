@@ -36,9 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('cars', CarController::class)->middleware('verified');
     Route::patch('cars/{car}/toggle-status', [CarController::class, 'toggleStatus'])->name('cars.toggleStatus');
 
-    // Admin routes (TOEGEVOEGD)
-    Route::get('/admin', [AdminController::class, 'index'])->middleware('admin')->name('admin.dashboard');
+    // Admin routes (AANGEPAST)
+    Route::get('/admin', [AdminController::class, 'index'])->middleware('admin')->name('admin.index');
 });
 
 require __DIR__ . '/auth.php';
-
