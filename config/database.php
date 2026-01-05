@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Str;
 
+// Suppress deprecation warning for PHP 8.5+ due to Laravel framework usage of PDO::MYSQL_ATTR_SSL_CA
+error_reporting(E_ALL & ~E_DEPRECATED);
+
 return [
 
     /*

@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 
+// Suppress deprecation warnings for PHP 8.5+ compatibility
+error_reporting(E_ALL & ~E_DEPRECATED);
+
 define('LARAVEL_START', microtime(true));
 
 // Determine if the application is in maintenance mode...
